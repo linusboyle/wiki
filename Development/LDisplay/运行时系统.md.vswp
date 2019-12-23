@@ -1,8 +1,0 @@
-vnote_backup_file_826537664 /home/linusboyle/sync/vnote/notes/Development/LDisplay/运行时系统.md
-# 运行时系统
-
-LDisplay的运行时系统的接口按照[标记语言翻译.md](标记语言翻译.md)里规定的设计。
-
-## 基于X11的实现
-
-原本运行时就是按照X11设计的。

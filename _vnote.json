@@ -17,6 +17,9 @@
         },
         {
             "name": "X11"
+        },
+        {
+            "name": "Network Security"
         }
     ],
     "tags": [
