@@ -18,3 +18,5 @@ Icon=inode-directory.png
 Exec=flat %f
 
 ```
+
+添加后用kbuildsycoca5重建缓存。
