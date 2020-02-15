@@ -16,9 +16,6 @@
             "name": "Linux"
         },
         {
-            "name": "X11"
-        },
-        {
             "name": "Network Security"
         },
         {
@@ -29,6 +26,9 @@
         },
         {
             "name": "COC"
+        },
+        {
+            "name": "Articles"
         }
     ],
     "tags": [
