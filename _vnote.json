@@ -7,28 +7,16 @@
     "recycle_bin_folder": "_v_recycle_bin",
     "sub_directories": [
         {
-            "name": "English"
+            "name": "开发"
         },
         {
-            "name": "Development"
+            "name": "课程"
         },
         {
-            "name": "Linux"
+            "name": "记录"
         },
         {
-            "name": "Network Security"
-        },
-        {
-            "name": "Music"
-        },
-        {
-            "name": "Readings"
-        },
-        {
-            "name": "COC"
-        },
-        {
-            "name": "Articles"
+            "name": "写作"
         }
     ],
     "tags": [

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang xml:lang>
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Propositional Logic</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+  </style>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<h1 id="propositional-logic-pl">Propositional Logic (PL)</h1>
+<h2 id="syntax">Syntax</h2>
+<p>The syntax of a language specifies its well-formed expressions, which can be grouped into categories (like terms and formulas in FOL). The language of PL only contains one category: formulas or sentences.</p>
+<blockquote>
+<p>sentences are expressions which can be assigned a truth value. formulas and sentences are the same in PL.</p>
+</blockquote>
+<p>propositional formulas are built from propositional(sentential) letters, connectives, like <span class="math inline">¬,∧,∨,→</span>, and parentheses. It is <strong>inductively defined</strong> as :</p>
+<ol type="1">
+<li>Propositional letters are formulas.</li>
+<li>if <span class="math inline"><em>ϕ</em></span> is a formula, then <span class="math inline">¬<em>ϕ</em></span> is a formula.</li>
+<li>if <span class="math inline"><em>ϕ</em></span> and <span class="math inline"><em>ψ</em></span> are formulas, then <span class="math inline">(<em>ϕ</em> ∧ <em>ψ</em>)</span>, <span class="math inline">(<em>ϕ</em> ∨ <em>ψ</em>)</span>, <span class="math inline">(<em>ϕ</em> → <em>ψ</em>)</span>, <span class="math inline">(<em>ϕ</em> ↔︎ <em>ψ</em>)</span> are formulas.</li>
+<li>Nothing else is a formula</li>
+</ol>
+<p>Or in <em>BNF form</em>:</p>
+<p><br /><span class="math display"><em>ϕ</em> := <em>p</em>|¬<em>ϕ</em>|(<em>ϕ</em> ∧ <em>ψ</em>)|(<em>ϕ</em> ∨ <em>ψ</em>)|(<em>ϕ</em> → <em>ψ</em>)|(<em>ϕ</em> ↔︎ <em>ψ</em>)</span><br /></p>
+<p>where p belongs to a certain vocabulary (a <strong>vocabulary</strong> is a given set of prop. letters).</p>
+<blockquote>
+<p>Variants: 1. It is possible to have smaller set of <em>primitive</em> connectives, for example <span class="math inline">¬<em>a</em><em>n</em><em>d</em>∨</span>. 2. <span class="math inline">⊥</span> can be used as a primitive logical sentence symbol. It’s not a prop. letter but a 0-ary connective standing for a contradiction.</p>
+</blockquote>
+<p>An <em>atomic formula</em> is either a prop. letter, or <span class="math inline">⊥</span> if defined.</p>
+<h3 id="inductive-definitions">Inductive definitions</h3>
+<p>To prove that all formulas have property P, show this: &gt; + (base) atomic formulas are P. &gt; + (induction steps) &gt; - if <span class="math inline"><em>ϕ</em></span> is P, then <span class="math inline">¬<em>ϕ</em></span> is P. &gt; - if <span class="math inline"><em>ϕ</em></span> and <span class="math inline"><em>ψ</em></span> are P, then <span class="math inline">(<em>ϕ</em> ∧ <em>ψ</em>)</span>, <span class="math inline">(<em>ϕ</em> ∨ <em>ψ</em>)</span>, <span class="math inline">(<em>ϕ</em> → <em>ψ</em>)</span>, <span class="math inline">(<em>ϕ</em> ↔︎ <em>ψ</em>)</span> are P.</p>
+<h3 id="normal-forms">Normal forms</h3>
+<ul>
+<li>negation normal form</li>
+<li>disjunctive normal form, dnf</li>
+<li>conjunctive normal form, cnf</li>
+</ul>
+<p>Normal forms can be obtained by using logical equivalences and substitution theorem. See the section below.</p>
+<h2 id="semantics">Semantics</h2>
+<p>A semantics for a language gives <em>truth conditions</em> for its sentences. The truth value of a sentence in PL depends on truth values of the prop. letters occurring in it. There are two truth values: 1/True and 0/False.</p>
+<p>An <strong>interpretation/valuation</strong> maps prop. letters to truth values. By means of <strong>truth tables</strong>, given a valuation V, every formula gets a truth value. For any valuation V and formula <span class="math inline"><em>ϕ</em></span>, define the relation <span class="math inline"><em>V</em> ⊨ <em>ϕ</em></span> as:</p>
+<ol type="1">
+<li><span class="math inline"><em>V</em> ⊨ <em>ϕ</em></span> iff V(p) = 1 for p in L</li>
+<li><span class="math inline"><em>V</em> ⊨ ¬<em>ϕ</em></span> iff <span class="math inline"><em>V</em> ⊭ <em>ϕ</em></span></li>
+<li><span class="math inline"><em>V</em> ⊨ <em>ϕ</em> ∧ <em>ψ</em></span> iff <span class="math inline"><em>V</em> ⊨ <em>ϕ</em></span> and <span class="math inline"><em>V</em> ⊨ <em>ψ</em></span></li>
+<li><span class="math inline"><em>V</em> ⊨ <em>ϕ</em> ∨ <em>ψ</em></span> iff <span class="math inline"><em>V</em> ⊨ <em>ϕ</em></span> or <span class="math inline"><em>V</em> ⊨ <em>ψ</em></span></li>
+<li><span class="math inline"><em>V</em> ⊨ <em>ϕ</em> → <em>ψ</em></span> iff <span class="math inline"><em>V</em> ⊭ <em>ϕ</em></span> or <span class="math inline"><em>V</em> ⊨ <em>ψ</em></span></li>
+<li><span class="math inline"><em>V</em> ⊨ <em>ϕ</em> ↔︎ <em>ψ</em></span> iff <span class="math inline"><em>V</em> ⊨ <em>ϕ</em></span> and <span class="math inline"><em>V</em> ⊨ <em>ψ</em></span>, or <span class="math inline"><em>V</em> ⊭ <em>ϕ</em></span> and <span class="math inline"><em>V</em> ⊭ <em>ψ</em></span></li>
+</ol>
+<blockquote>
+<p>Locality Lemma for PL</p>
+<p>If V and V’ agree on the prop. letters in <span class="math inline"><em>ϕ</em></span>, <span class="math inline"><em>V</em> ⊨ <em>ϕ</em></span> iff <span class="math inline"><em>V</em>′ ⊨ <em>ϕ</em></span>.</p>
+<p><em>proved by induction.</em></p>
+</blockquote>
+<h3 id="logic-consequence">Logic consequence</h3>
+<p>Let <span class="math inline"><em>ϕ</em></span> be a sentence and <span class="math inline"><em>Γ</em></span> a set of sentences. <span class="math inline"><em>ϕ</em></span> is a logical consequence of <span class="math inline"><em>Γ</em></span>, or <span class="math inline"><em>Γ</em> ⊨ <em>ϕ</em></span>, iff for all V, <span class="math inline"><em>V</em> ⊨ <em>Γ</em></span> implies <span class="math inline"><em>V</em> ⊨ <em>ϕ</em></span>.</p>
+<blockquote>
+<p><span class="math inline"><em>Γ</em></span> can be infinite.</p>
+</blockquote>
+<h3 id="related-notions">Related notions</h3>
+<ul>
+<li><span class="math inline"><em>ϕ</em></span> is logically true (a <strong>tautology</strong> in PL) or <span class="math inline"> ⊨ <em>ϕ</em></span> if <span class="math inline"><em>ϕ</em></span> is true in every valuation.</li>
+<li><span class="math inline"><em>ϕ</em></span> and <span class="math inline"><em>ψ</em></span> are <strong>logically equivalent</strong>, in symbols <span class="math inline"><em>ϕ</em> = <em>ψ</em></span>, if <span class="math inline"><em>ϕ</em></span> and <span class="math inline"><em>ψ</em></span> are true in the same valuation.</li>
+<li><span class="math inline"><em>Γ</em></span> is <strong>satisfiable</strong> if there is a valuation V s.t. all sentences in <span class="math inline"><em>Γ</em></span> are true in V.</li>
+</ul>
+<p>Each of these four logical concepts can be defined in terms of each of the others. For example:</p>
+<ul>
+<li>logical truth can be defined as <span class="math inline">∅ ⊨ <em>ϕ</em></span>.</li>
+<li>Logical consequence can be defined in terms of satisfiability:</li>
+</ul>
+<blockquote>
+<p><span class="math inline"><em>Γ</em> ⊨ <em>ϕ</em></span> iff <span class="math inline"><em>Γ</em> ∪ {¬<em>ϕ</em>}</span> is not satisfiable</p>
+</blockquote>
+<h3 id="useful-equivalences">Useful equivalences</h3>
+<ul>
+<li>de Morgan’s laws</li>
+<li>double negation</li>
+<li>excluded middle</li>
+<li>definitions of <span class="math inline">¬,∧,∨,→</span> in terms of other connectives.</li>
+<li>distributive laws</li>
+</ul>
+<h3 id="truth-function">Truth function</h3>
+<p>An n-ary truth function is a function from <span class="math inline">{0, 1}<sup><em>n</em></sup></span> to {0, 1}.</p>
+<blockquote>
+<p>PL is <em>truthfunctionally complete</em>, that is</p>
+<p>Every n-ary truth function can be expressed by a PL formula</p>
+</blockquote>
+<h3 id="substitution-theorem">Substitution Theorem</h3>
+<p>Let <span class="math inline"><em>ϕ</em>[<em>p</em>]</span> indicate that <span class="math inline"><em>ϕ</em></span> may have some occurrences of p, and <span class="math inline"><em>ϕ</em>[<em>ψ</em>]</span> result from replacing these occurrences by <span class="math inline"><em>ψ</em></span>.</p>
+<p>We have: &gt; if <span class="math inline"><em>V</em>(<em>ψ</em>) = <em>V</em>(<em>ψ</em>′)</span>, then <span class="math inline"><em>V</em>(<em>ϕ</em>[<em>ψ</em>]) = <em>V</em>(<em>ϕ</em>[<em>ψ</em>′])</span></p>
+<p>and a corollary:</p>
+<blockquote>
+<p>if <span class="math inline"><em>ψ</em> = <em>ψ</em>′</span>, then <span class="math inline"><em>ϕ</em>[<em>ψ</em>] = <em>ϕ</em>[<em>ψ</em>′]</span></p>
+</blockquote>
+<p>Proof:</p>
+<blockquote>
+<p>induction on <span class="math inline"><em>ϕ</em></span>.<br />
++ (base)<br />
+<span class="math inline"><em>ϕ</em></span> is an atom. If it is not p, then obviously <span class="math inline"><em>V</em>(<em>q</em>[<em>ψ</em>]) = <em>V</em>(<em>q</em>) = <em>V</em>(<em>q</em>[<em>ψ</em>′])</span>. If it is p, then<span class="math inline"><em>V</em>(<em>p</em>[<em>ψ</em>]) = <em>V</em>(<em>ψ</em>) = <em>V</em>(<em>ψ</em>′) = <em>V</em>(<em>p</em>[<em>ψ</em>′])</span> + (ind.) <span class="math inline"><em>ϕ</em></span> is <span class="math inline">¬<em>θ</em></span>. then:<br />
+&gt; <span class="math inline"><em>V</em>((¬<em>θ</em>)[<em>ψ</em>]) = 1</span><br />
+&gt; iff <span class="math inline"><em>V</em>(¬<em>θ</em>[<em>ψ</em>]) = 1</span><br />
+&gt; iff <span class="math inline"><em>V</em>(<em>θ</em>[<em>ψ</em>]) = 0</span> (truth def.)<br />
+&gt; iff <span class="math inline"><em>V</em>(<em>θ</em>[<em>ψ</em>′]) = 0</span> (ind. hyp.)<br />
+&gt; iff <span class="math inline"><em>V</em>(¬<em>θ</em>[<em>ψ</em>′]) = 1</span> (truth def.)<br />
+&gt; iff <span class="math inline"><em>V</em>((¬<em>θ</em>)[<em>ψ</em>′]) = 1</span><br />
++ (ind.) <span class="math inline"><em>ϕ</em></span> is <span class="math inline"><em>θ</em><sub>1</sub> ∧ <em>θ</em><sub>2</sub></span>. then:<br />
+&gt; <span class="math inline"><em>V</em>((<em>θ</em><sub>1</sub> ∧ <em>θ</em><sub>2</sub>)[<em>ψ</em>]) = 1</span> iff<br />
+&gt; <span class="math inline"><em>V</em>(<em>θ</em><sub>1</sub>[<em>ψ</em>] ∧ <em>θ</em><sub>2</sub>[<em>ψ</em>]) = 1</span> iff<br />
+&gt; <span class="math inline"><em>V</em>(<em>θ</em><sub>1</sub>[<em>ψ</em>]) = <em>V</em>(<em>θ</em><sub>2</sub>[<em>ψ</em>]) = 1</span> iff<br />
+&gt; <span class="math inline"><em>V</em>(<em>θ</em><sub>1</sub>[<em>ψ</em>′]) = <em>V</em>(<em>θ</em><sub>2</sub>[<em>ψ</em>′]) = 1</span> iff<br />
+&gt; <span class="math inline"><em>V</em>(<em>θ</em><sub>1</sub>[<em>ψ</em>′] ∧ <em>θ</em><sub>2</sub>[<em>ψ</em>′]) = 1</span> iff<br />
+&gt; <span class="math inline"><em>V</em>((<em>θ</em><sub>1</sub> ∧ <em>θ</em><sub>2</sub>)[<em>ψ</em>′]) = 1</span></p>
+</blockquote>
+</body>
+</html>
