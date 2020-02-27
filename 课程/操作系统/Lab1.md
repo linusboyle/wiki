@@ -1,5 +1,7 @@
 # Lab1
 
+注：Makefile经过修改（加入bootloader的linker script，终端模拟器改成了xterm）
+
 ## E1
 
 ### Q1
@@ -30,7 +32,7 @@
 
 一是由于KVM的干扰，在调试过程中遇到了BIOS起始地址错误的问题，因此必须使qemu关闭KVM、设置gdb为i8086实模式，并使用硬件断点`hbreak *0x7c00`。
 
-第二个问题，ucore假定的make与我的make版本不同，导致行为不一致，从而导致在链接bootloader的时候，.text段的链接顺序取决于链接器的参数顺序。为了解决这个问题，我为bootloader添加了一个link script:
+第二个问题，ucore假定的make与我的make版本不同，导致行为不一致，从而导致在链接bootloader的时候，.text段的链接顺序取决于链接器的参数顺序。为了解决这个问题，我为bootloader添加了一个linker script:
 
 ```ld
 OUTPUT_FORMAT("elf32-i386", "elf32-i386", "elf32-i386")
@@ -146,3 +148,21 @@ Bootloader从protcseg开始就是保护模式下运行了，之后会进行一�
 
 ## E5
 
+和作业1差不多，只要按照ebp链上溯即可，相关信息可以直接调用`print_debuginfo`打印。其中，每个栈帧从ebp所指往上按字依次是old ebp，return address和参数列表。
+
+因为bootloader将第一块栈帧设置为了0~0x7c00，因此ebp为0时就可以停止。
+
+
+## E6
+
+### P1
+
+中断描述符为8字节，其中中断和异常类型的描述符的16~31位是段选择子，通过它在GDT中找到段基址，并加上0~15和48~63位的偏移量，得到中断例程的入口地址。
+
+### P2
+
+使用定义好的宏SETGATE可以很方便的完成。256个中断向量中，0x80是系统调用，120是TOK SWITCH，需要DPL=3，其他的描述子都是DPL=0。因为不知道某个异常号对应的是异常还是中断，ISTRAP一律设为了中断，实际上两者在处理上也没有太大的区别。
+
+### P3
+
+按照注释写就行了，一共就3、4行
