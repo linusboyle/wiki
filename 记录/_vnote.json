@@ -20,6 +20,9 @@
         },
         {
             "name": "Vim"
+        },
+        {
+            "name": "matlab"
         }
     ],
     "version": "1"
