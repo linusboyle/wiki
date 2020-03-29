@@ -23,6 +23,9 @@
         },
         {
             "name": "matlab"
+        },
+        {
+            "name": "texmacs"
         }
     ],
     "version": "1"
