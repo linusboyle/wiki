@@ -26,6 +26,9 @@
         },
         {
             "name": "texmacs"
+        },
+        {
+            "name": "Racket"
         }
     ],
     "version": "1"
