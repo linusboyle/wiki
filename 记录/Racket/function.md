@@ -51,7 +51,7 @@ case-lambda对传入参数的基数敏感。它有一系列绑定和函数体。
 
 ## define
 
-define支持rest参数
+当define用于定义函数时，相当于lambda的简写
 
 ```
 (define (head args) body ...+)
@@ -62,9 +62,19 @@ args	 	=	 	arg ...
  	 	|	 	arg ... . rest-id
 ```
 
-define允许定义柯里化的函数：
+define允许直接定义柯里化的函数：
 
 ```racket
 (define ((make-add-suffix s2) s)
   (string-append s s2))
  ```
+
+## 多返回值
+
+使用values可以实现多返回值
+
+使用define-values将一组标识符绑定到返回的多值上。
+
+```
+(define-values (id ...) expr)
+```
