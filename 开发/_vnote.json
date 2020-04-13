@@ -5,6 +5,9 @@
     "sub_directories": [
         {
             "name": "LDisplay"
+        },
+        {
+            "name": "CertiCore"
         }
     ],
     "version": "1"
