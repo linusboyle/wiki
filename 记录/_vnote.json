@@ -29,6 +29,9 @@
         },
         {
             "name": "Racket"
+        },
+        {
+            "name": "Python"
         }
     ],
     "version": "1"
