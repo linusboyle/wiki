@@ -11,6 +11,7 @@ CPU状态包括：
 - 内存状态mregions，Serval框架提供特性
 - shims?，Serval框架提供特性
 
+模块：
 - objdump.rkt模块提供了从objdump的输出中解析指令的机制
 - interp模块是解释器
 - encoder模块处理名称和底层位表示的转换

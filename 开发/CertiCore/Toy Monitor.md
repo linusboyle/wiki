@@ -22,3 +22,24 @@ TM用C语言和riscv汇编编写。验证的步骤是：
 。。。
 
 但是我们的规范不一定是正确的。要保证规范尽量接近我们主观的想法，可以对抽象的规范进行进一步的验证，比如验证规范的一些重要属性。Serval提供了很多预定义的属性，比如OS中常见的进程隔离要求，或者说non-interferrence。 在TM里，就验证了不同用户互不干扰的性质。
+
+```dot
+digraph G {
+    size = "1000 1000";
+    a1 [label = "C\&Assembly"];
+    a2 [label = "Binary"];
+    a3 [label = "Disassembled Code"]
+    a4 [label = "Identifier List"]
+    a5 [label = "Instructions"]
+    a6 [label = "Symbol Hash Table"]
+    subgraph H{
+        a5
+        a6
+    }
+    a1->a2 [label=gcc]
+    a2->a3 [label = objdump]
+    a2->a4 [label=nm]
+    a3->a5 [label = objdump_reader]
+    a4->a6 [label = nm_reader]
+};
+```
