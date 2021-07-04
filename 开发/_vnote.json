@@ -8,6 +8,9 @@
         },
         {
             "name": "CertiCore"
+        },
+        {
+            "name": "ultimate"
         }
     ],
     "version": "1"
